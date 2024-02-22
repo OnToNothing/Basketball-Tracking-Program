@@ -72,7 +72,7 @@ set CLASSPATH=%APP_HOME%\lib\basketball-tracking-program-1.0-SNAPSHOT.jar;%APP_H
 
 
 @rem Execute basketball-tracking-program
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %BASKETBALL_TRACKING_PROGRAM_OPTS%  -classpath "%CLASSPATH%" com.example.mysql.CreateBasketballDB %*
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %BASKETBALL_TRACKING_PROGRAM_OPTS%  -classpath "%CLASSPATH%" com.example.mysql.MainApplication %*
 
 :end
 @rem End local scope for the variables with windows NT shell

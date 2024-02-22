@@ -3,7 +3,7 @@ plugins {
     id 'application'
 }
 
-mainClassName = 'com.example.mysql.CreateBasketballDB'
+mainClassName = 'com.example.mysql.MainApplication'
 
 
 group 'com.example'
