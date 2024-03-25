@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basketball Tracking</title>
+  <link rel="stylesheet" href="/basketballtrackingnew/static/style.css">
+</head>
+<body>
+  <h1 class="centered">Basketball Tracking Program</h1>
+</body>
+<div class="rosterPanel">
+ <div class="centered">
+   <button onclick="goToArchivedList()">Go to Archived List</button>
+    <button onclick="goToPracticePage()">Go to Practice Page</button>
+ </div>
+ <script>
+   function goToArchivedList() {
+      document.querySelector('.archivePanel').style.display = 'block';
+      document.querySelector('.rosterPanel').style.display = 'none';
+   }
+   function goToPracticePage() {
+      document.querySelector('.practicePanel').style.display = 'block';
+      document.querySelector('.rosterPanel').style.display = 'none';
+   }
+ </script>
+ 
+ <div class="dropdown">
+   <h2 class="centered_player">Enter Player Information</h2>
+   <table>
+     <thead>
+       <tr>
+         <th class="w-[200px]">Added Players List</th>
+
+       </tr>
+
+     </thead>
+     <tbody id="player-list">
+       <tr>
+         <hr>
+           <div class="input-container">
+             <input id="PlayerName" placeholder="Enter Player Name" type="text" />
+             <input id="PlayerYear" placeholder="Enter Player Year" type="text" />
+             <input id="PlayerNumber" placeholder="Enter Player Number" type="text" />
+             <button class="add_player_button">Add Player</button>
+             <button class="sort_player_button">Sort player information</button>
+             <hr>
+           </div>
+         </td>
+       </tr>
+     </tbody>
+   </table>
+ </div>
+</div>
+
+<div class="archivePanel">
+  <h1 class="centered">Archived Players</h1>
+  <div class="centered">
+    <button onclick="goToHomePageArchive()">Go to Home Page</button>
+  </div>
+  <script>
+    function goToHomePagArchive() {
+      document.querySelector('.archivePanel').style.display = 'none';
+      document.querySelector('.rosterPanel').style.display = 'block';
+    }
+  </script>
+
+ <div class="archive_dropdown">
+   <h2 class="centered_player">Archived Players</h2>
+   <table>
+     <thead>
+       <tr>
+         <th class="w-[200px]">Archived Players List</th>
+
+       </tr>
+
+     </thead>
+     <tbody id="archived_player-list">
+       <tr>
+         <hr>
+             <hr>
+           </div>
+         </td>
+       </tr>
+     </tbody>
+   </table>
+ </div>
+</div>
+
+<div class="practicePanel">
+  <h1 class="centered">Practices Logging Page </h1>
+  <div class="homePage">
+    <button onclick="goToHomePage()">Go to Home Page</button>
+  </div>
+  <script>
+    function goToHomePage() {
+      document.querySelector('.rosterPanel').style.display = 'block';
+      document.querySelector('.practicePanel').style.display = 'none';
+    }
+  </script>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="w-[200px]">Logged Practice List:</th>
+
+      </tr>
+
+    </thead>
+</thead>
+<tbody id="practice-list">
+  <tr>
+    <hr>
+      <div class="input-container">
+        <input id="DateOfPractice" placeholder="Enter Date of Practice" type="text" />
+        <input id="FreeThrows" placeholder="Enter Number of Free Throws Attempted" type="text" />
+        <input id="SuccessfulFreeThrows" placeholder="Enter Number of Successful Free Throws " type="text" />
+        <button class="add_player_button">Add Practice Info to list</button>
+        <hr>
+      </div>
+    </td>
+  </tr>
+</tbody>
+
+
+<script src="/basketballtrackingnew/static/app.js"></script>
+
+</body>
+</html>
+</html>
