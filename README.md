@@ -1,4 +1,4 @@
-#How to get the Live Server up and running!
+# How to get the Live Server up and running!
 
 First, make sure you have installed LiveServer on VSCode. To do this, open VSCode and in the Extensions tab on the left, search LiveServer in the searchbar. Click on the first result and install LiveServer.
 
