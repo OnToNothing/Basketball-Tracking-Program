@@ -18,17 +18,6 @@ function addPlayer() {
     var playerYear = document.getElementById("PlayerYear").value;
     var playerNumber = document.getElementById("PlayerNumber").value;
 
-    var players = JSON.parse(localStorage.getItem('players')) || [];
-
-    players.push({
-        playerName: playerName,
-        playerYear: playerYear,
-        playerNumber: playerNumber
-    });
-
-    // Save the updated players array back to local storage
-    localStorage.setItem('players', JSON.stringify(players));
-
     // Check if any of the fields are empty
     if (playerName === "" || playerYear === "" || playerNumber === "") {
         alert("Please fill out all fields before adding player data!");
@@ -82,12 +71,9 @@ function addPlayer() {
     var archivePlayerButton = document.createElement('button');
     archivePlayerButton.textContent = 'Archive Player Info';
     archivePlayerButton.addEventListener('click', function() {
-
-        localStorage.setItem('archived_playerName', playerName);
-        localStorage.setItem('archived_playerYear', playerYear);
-        localStorage.setItem('archived_playerNumber', playerNumber);
-        archivePlayer();
-
+        archivePlayer(playerName, playerYear, playerNumber);
+        newRowData.remove(); // Remove the row when delete button is clicked
+        newRowLabels.remove(); // Also remove the label row
     });
 
     var deleteButton = document.createElement('button');
@@ -133,12 +119,7 @@ function sortPlayer() {
     }
 }
 
-function archivePlayer() {
-  
-// Get the values of the input fields
-var playerName = localStorage.getItem('playerName');
-var playerYear = localStorage.getItem('playerYear');
-var playerNumber = localStorage.getItem('playerNumber');
+function archivePlayer(playerName, playerYear, playerNumber) {
 
 // Create a new row for the player
 var newRowLabels = document.createElement('tr');
@@ -184,25 +165,16 @@ optionsButton.className = 'options-button';
 var optionsDropdown = document.createElement('div');
 optionsDropdown.className = 'dropdown-content';
 
-var archivePlayerButton = document.createElement('button');
-archivePlayerButton.textContent = 'Archive Player Info';
-archivePlayerButton.addEventListener('click', function() {
 
-    localStorage.setItem('archived_playerName', playerName);
-    localStorage.setItem('archived_playerYear', playerYear);
-    localStorage.setItem('archived_playerNumber', playerNumber);
-
-});
-
-var deleteButton = document.createElement('button');
-deleteButton.textContent = 'Delete Player Info';
-deleteButton.addEventListener('click', function() {
+var unarchiveButton = document.createElement('button');
+unarchiveButton.textContent = 'Unarchive Player';
+unarchiveButton.addEventListener('click', function() {
     newRowData.remove(); // Remove the row when delete button is clicked
     newRowLabels.remove(); // Also remove the label row
+    unarchivePlayer(playerName, playerYear, playerNumber);
 });
 
-optionsDropdown.appendChild(archivePlayerButton);
-optionsDropdown.appendChild(deleteButton);
+optionsDropdown.appendChild(unarchiveButton);
 
 optionsButton.appendChild(optionsDropdown);
 optionsCell.appendChild(optionsButton);
@@ -216,4 +188,86 @@ newRowData.appendChild(optionsCell);
 // Append the data row to the player list
 document.getElementById('archived_player-list').appendChild(newRowData);
 
+}
+
+function unarchivePlayer(playerName, playerYear, playerNumber) {
+
+    // Create a new row for the player
+    var newRowLabels = document.createElement('tr');
+    newRowLabels.className = 'player-row';
+
+    // Create table cells for labels
+    var nameLabelCell = document.createElement('td');
+    nameLabelCell.textContent = 'Name';
+
+    var yearLabelCell = document.createElement('td');
+    yearLabelCell.textContent = 'Year';
+
+    var numberLabelCell = document.createElement('td');
+    numberLabelCell.textContent = 'Number';
+
+    // Append label cells to the row
+    newRowLabels.appendChild(nameLabelCell);
+    newRowLabels.appendChild(yearLabelCell);
+    newRowLabels.appendChild(numberLabelCell);
+
+    // Append the label row to the player list
+    document.getElementById('player-list').appendChild(newRowLabels);
+
+    // Create a new row for the player data
+    var newRowData = document.createElement('tr');
+    newRowData.className = 'player-row';
+
+    // Create table cells for player data
+    var playerNameCell = document.createElement('td');
+    playerNameCell.textContent = playerName;
+
+    var playerYearCell = document.createElement('td');
+    playerYearCell.textContent = playerYear;
+
+    var playerNumberCell = document.createElement('td');
+    playerNumberCell.textContent = playerNumber;
+
+    var optionsCell = document.createElement('td');
+    var optionsButton = document.createElement('button');
+    optionsButton.textContent = 'Options';
+    optionsButton.className = 'options-button';
+
+    var optionsDropdown = document.createElement('div');
+    optionsDropdown.className = 'dropdown-content';
+
+    var archivePlayerButton = document.createElement('button');
+    archivePlayerButton.textContent = 'Archive Player Info';
+    archivePlayerButton.addEventListener('click', function() {
+        archivePlayer(playerName, playerYear, playerNumber);
+        newRowData.remove(); // Remove the row when delete button is clicked
+        newRowLabels.remove(); // Also remove the label row
+    });
+
+    var deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete Player Info';
+    deleteButton.addEventListener('click', function() {
+        newRowData.remove(); // Remove the row when delete button is clicked
+        newRowLabels.remove(); // Also remove the label row
+    });
+
+    optionsDropdown.appendChild(archivePlayerButton);
+    optionsDropdown.appendChild(deleteButton);
+
+    optionsButton.appendChild(optionsDropdown);
+    optionsCell.appendChild(optionsButton);
+
+    // Append player data cells to the row
+    newRowData.appendChild(playerNameCell);
+    newRowData.appendChild(playerYearCell);
+    newRowData.appendChild(playerNumberCell);
+    newRowData.appendChild(optionsCell);
+
+    // Append the data row to the player list
+    document.getElementById('player-list').appendChild(newRowData);
+
+    // Clear input fields after adding player
+    document.getElementById("PlayerName").value = "";
+    document.getElementById("PlayerYear").value = "";
+    document.getElementById("PlayerNumber").value = "";
 }
