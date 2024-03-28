@@ -11,6 +11,19 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.archivePanel').style.display = 'none';
     document.querySelector('.practicePanel').style.display = 'none';
 })
+var newRowLabels = document.createElement('tr');
+    newRowLabels.className = 'player-row';
+
+    // Create table cells for labels
+    var nameLabelCell = document.createElement('td');
+    nameLabelCell.textContent = 'Name';
+
+    var yearLabelCell = document.createElement('td');
+    yearLabelCell.textContent = 'Year';
+
+    var numberLabelCell = document.createElement('td');
+    numberLabelCell.textContent = 'Number';
+
 
 function addPlayer() {
     // Get the values of the input fields
@@ -24,19 +37,21 @@ function addPlayer() {
         return; // Exit the function if any field is empty
     }
 
+    // Check if the player already exists
+    var playerList = document.getElementById('player-list');
+    var rows = playerList.getElementsByClassName('player-data-row');
+    for (var i = 0; i < rows.length; i++) {
+        var nameCell = rows[i].getElementsByTagName('td')[0];
+        var yearCell = rows[i].getElementsByTagName('td')[1];
+        var numberCell = rows[i].getElementsByTagName('td')[2];
+        if (nameCell.textContent === playerName && yearCell.textContent === playerYear && numberCell.textContent === playerNumber) {
+            alert("Player already exists!");
+            return; // Exit the function if player already exists
+        }
+    }
+
     // Create a new row for the player
-    var newRowLabels = document.createElement('tr');
-    newRowLabels.className = 'player-row';
-
-    // Create table cells for labels
-    var nameLabelCell = document.createElement('td');
-    nameLabelCell.textContent = 'Name';
-
-    var yearLabelCell = document.createElement('td');
-    yearLabelCell.textContent = 'Year';
-
-    var numberLabelCell = document.createElement('td');
-    numberLabelCell.textContent = 'Number';
+    
 
     // Append label cells to the row
     newRowLabels.appendChild(nameLabelCell);
@@ -48,7 +63,7 @@ function addPlayer() {
 
     // Create a new row for the player data
     var newRowData = document.createElement('tr');
-    newRowData.className = 'player-row';
+    newRowData.className = 'player-row player-data-row';
 
     // Create table cells for player data
     var playerNameCell = document.createElement('td');
@@ -106,7 +121,7 @@ function addPlayer() {
 
 function sortPlayer() {
     var playerList = document.getElementById('player-list');
-    var rows = playerList.getElementsByClassName('player-row');
+    var rows = playerList.getElementsByClassName('player-data-row');
 
     var sortedRows = Array.from(rows).sort((a, b) => { 
         var aName = a.getElementsByTagName('td')[0].textContent; 
