@@ -29,6 +29,10 @@ var newRowLabels = document.createElement('tr');
     numberLabelCell.textContent = 'Number';
 
 
+document.querySelector('.sort_player_number').addEventListener('click', function() {
+    sortPlayerNumber();
+});
+
 function addPlayer() {
     // Get the values of the input fields
     var playerName = document.getElementById("PlayerName").value;

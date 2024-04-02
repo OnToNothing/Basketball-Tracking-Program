@@ -153,6 +153,43 @@
   }
 
   .sort_player_button {
+    height: 5vh;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .sort_player_number {
+    height: 5vh;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  #DateOfPractice {
+    height: 5vh
+  }
+
+  #FreeThrows {
+    width: 32vh;
+    height: 5vh
+  }
+
+  #SuccessfulFreeThrows {
+    width: 32vh;
+    height: 5vh
+  }
+
+  .homePage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+  }
+
+  #ThreePointers {
+    width: 33vh;
+    height: 5vh
+  }
+
     background-color: #3182ce; /* Blue */
       color: white;
       border: none;
@@ -162,3 +199,4 @@
       cursor: pointer;
       transition: background-color 0.3s;
   }
+
