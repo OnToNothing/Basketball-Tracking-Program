@@ -9,15 +9,15 @@
 </head>
 <body>
   <header>
-  <h1 > Basketball Tracking Program</h1>
-  
+  <h1> Basketball Tracking Program</h1>
+  <div class="centered">
+    <button onclick="goToArchivedList()">Go to Archived List</button>
+    <button onclick="goToPracticePage()">Go to Practice Page</button>
+  </div>
+  </header>
 </body>
 <div class="rosterPanel">
- <div class="centered">
-   <button onclick="goToArchivedList()">Go to Archived List</button>
-    <button onclick="goToPracticePage()">Go to Practice Page</button>
-    </header>
- </div>
+ 
  <script>
    function goToArchivedList() {
       document.querySelector('.archivePanel').style.display = 'block';
@@ -48,6 +48,7 @@
              <input id="PlayerNumber" placeholder="Enter Player Number" type="text" />
              <button class="add_player_button">Add Player</button>
              <button class="sort_player_button">Sort player information</button>
+             <button class="sort_player_number">Sort player information by number</button>
              <hr>
            </div>
          </td>

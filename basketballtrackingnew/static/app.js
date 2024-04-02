@@ -3,6 +3,10 @@ document.querySelector('.add_player_button').addEventListener('click', function(
     addPlayer();
 });
 
+document.querySelector('.sort_player_number').addEventListener('click', function() {
+    sortPlayerNumber();
+});
+
 document.querySelector('.sort_player_button').addEventListener('click', function() {
     sortPlayer();
 });
@@ -285,4 +289,26 @@ function unarchivePlayer(playerName, playerYear, playerNumber) {
     document.getElementById("PlayerName").value = "";
     document.getElementById("PlayerYear").value = "";
     document.getElementById("PlayerNumber").value = "";
+}
+
+function sortPlayerNumber() {
+    var playerList = document.getElementById('player-list');
+    var rows = playerList.getElementsByClassName('player-row');
+
+    var sortedRows = Array.from(rows).sort((a, b) => { 
+        var aNumber = parseInt(a.getElementsByTagName('td')[2].textContent); 
+        var bNumber = parseInt(b.getElementsByTagName('td')[2].textContent);
+        return aNumber - bNumber;
+    });
+
+    // Clear the player list before appending sorted rows
+    while (playerList.firstChild) {
+        playerList.removeChild(playerList.firstChild);
+    }
+
+    // Append sorted rows back to the player list
+    for (var i = 0; i < sortedRows.length; i++) {
+        playerList.appendChild(sortedRows[i]);
+    }
+
 }
