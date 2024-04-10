@@ -15,18 +15,25 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.archivePanel').style.display = 'none';
     document.querySelector('.practicePanel').style.display = 'none';
 })
+
 var newRowLabels = document.createElement('tr');
     newRowLabels.className = 'player-row';
 
-    // Create table cells for labels
-    var nameLabelCell = document.createElement('td');
-    nameLabelCell.textContent = 'Name';
+var newPracticeRowLabel = document.createElement('tr');
+    newRowLabels.className = 'practice-player-row';
 
-    var yearLabelCell = document.createElement('td');
-    yearLabelCell.textContent = 'Year';
+// Create table cells for labels
+var nameLabelCell = document.createElement('td');
+nameLabelCell.textContent = 'Name';
 
-    var numberLabelCell = document.createElement('td');
-    numberLabelCell.textContent = 'Number';
+var yearLabelCell = document.createElement('td');
+yearLabelCell.textContent = 'Year';
+
+var numberLabelCell = document.createElement('td');
+numberLabelCell.textContent = 'Number';
+
+var practiceNameLabelCell = document.createElement('td');
+practiceNameLabelCell.textContent = 'Name';
 
 
 document.querySelector('.sort_player_number').addEventListener('click', function() {
@@ -58,20 +65,25 @@ function addPlayer() {
         }
     }
 
-    // Create a new row for the player
-    
-
     // Append label cells to the row
     newRowLabels.appendChild(nameLabelCell);
     newRowLabels.appendChild(yearLabelCell);
     newRowLabels.appendChild(numberLabelCell);
 
+    newPracticeRowLabel.appendChild(practiceNameLabelCell);
+
     // Append the label row to the player list
     document.getElementById('player-list').appendChild(newRowLabels);
+    //Attempting to add row data to the practice page as well
+    document.getElementById('practice-list').appendChild(newPracticeRowLabel);
 
     // Create a new row for the player data
     var newRowData = document.createElement('tr');
     newRowData.className = 'player-row player-data-row';
+
+    // Create a new row for the player data in the practice page
+    var practiceNewRowData = document.createElement('tr');
+    practiceNewRowData.className = 'practice -player-row practice-player-data-row';
 
     // Create table cells for player data
     var playerNameCell = document.createElement('td');
@@ -82,6 +94,9 @@ function addPlayer() {
 
     var playerNumberCell = document.createElement('td');
     playerNumberCell.textContent = playerNumber;
+
+    var practicePlayerNameCell = document.createElement('td');
+    practicePlayerNameCell.textContent = playerName;
 
     var optionsCell = document.createElement('td');
     var optionsButton = document.createElement('button');
@@ -97,6 +112,7 @@ function addPlayer() {
         archivePlayer(playerName, playerYear, playerNumber);
         newRowData.remove(); // Remove the row when delete button is clicked
         newRowLabels.remove(); // Also remove the label row
+        practiceNewRowData.remove(); // Remove the row from practice when delete button is clicked
     });
 
     var deleteButton = document.createElement('button');
@@ -104,6 +120,7 @@ function addPlayer() {
     deleteButton.addEventListener('click', function() {
         newRowData.remove(); // Remove the row when delete button is clicked
         newRowLabels.remove(); // Also remove the label row
+        practiceNewRowData.remove(); // Remove the row from practice when delete button is clicked
     });
 
     optionsDropdown.appendChild(archivePlayerButton);
@@ -114,12 +131,19 @@ function addPlayer() {
 
     // Append player data cells to the row
     newRowData.appendChild(playerNameCell);
+    
     newRowData.appendChild(playerYearCell);
     newRowData.appendChild(playerNumberCell);
     newRowData.appendChild(optionsCell);
+    
+    // Append the player name data to the practice list row
+    practiceNewRowData.appendChild(practicePlayerNameCell);
 
     // Append the data row to the player list
     document.getElementById('player-list').appendChild(newRowData);
+
+    // Attempt to add the data row to the practice list
+    document.getElementById('practice-list').appendChild(practiceNewRowData);
 
     // Clear input fields after adding player
     document.getElementById("PlayerName").value = "";
