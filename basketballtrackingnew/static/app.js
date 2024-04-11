@@ -20,7 +20,7 @@ var newRowLabels = document.createElement('tr');
     newRowLabels.className = 'player-row';
 
 var newPracticeRowLabel = document.createElement('tr');
-    newRowLabels.className = 'practice-player-row';
+    newPracticeRowLabel.className = 'practice-player-row';
 
 // Create table cells for labels
 var nameLabelCell = document.createElement('td');
@@ -32,8 +32,29 @@ yearLabelCell.textContent = 'Year';
 var numberLabelCell = document.createElement('td');
 numberLabelCell.textContent = 'Number';
 
+// Create table cells for labels in the practice page
 var practiceNameLabelCell = document.createElement('td');
 practiceNameLabelCell.textContent = 'Name';
+
+var practiceFTACell = document.createElement('td');
+practiceFTACell.textContent = 'FTA';
+
+var practiceFTMCell = document.createElement('td');
+practiceFTMCell.textContent = 'FTM';
+
+// Append label cells to the row
+newRowLabels.appendChild(nameLabelCell);
+newRowLabels.appendChild(yearLabelCell);
+newRowLabels.appendChild(numberLabelCell);
+
+newPracticeRowLabel.appendChild(practiceNameLabelCell);
+newPracticeRowLabel.appendChild(practiceFTACell);
+newPracticeRowLabel.appendChild(practiceFTMCell);
+
+// Append the label row to the player list
+document.getElementById('player-list').appendChild(newRowLabels);
+//Attempting to add row data to the practice page as well
+document.getElementById('practice-list').appendChild(newPracticeRowLabel);
 
 
 document.querySelector('.sort_player_number').addEventListener('click', function() {
@@ -65,25 +86,13 @@ function addPlayer() {
         }
     }
 
-    // Append label cells to the row
-    newRowLabels.appendChild(nameLabelCell);
-    newRowLabels.appendChild(yearLabelCell);
-    newRowLabels.appendChild(numberLabelCell);
-
-    newPracticeRowLabel.appendChild(practiceNameLabelCell);
-
-    // Append the label row to the player list
-    document.getElementById('player-list').appendChild(newRowLabels);
-    //Attempting to add row data to the practice page as well
-    document.getElementById('practice-list').appendChild(newPracticeRowLabel);
-
     // Create a new row for the player data
     var newRowData = document.createElement('tr');
     newRowData.className = 'player-row player-data-row';
 
     // Create a new row for the player data in the practice page
     var practiceNewRowData = document.createElement('tr');
-    practiceNewRowData.className = 'practice -player-row practice-player-data-row';
+    practiceNewRowData.className = 'practice-player-row practice-player-data-row';
 
     // Create table cells for player data
     var playerNameCell = document.createElement('td');
@@ -95,9 +104,20 @@ function addPlayer() {
     var playerNumberCell = document.createElement('td');
     playerNumberCell.textContent = playerNumber;
 
+    // Create table cells for player data in the practice page
     var practicePlayerNameCell = document.createElement('td');
     practicePlayerNameCell.textContent = playerName;
 
+    // Input fields for Free throws and Free throws made
+    var practicePlayerFTACell = document.createElement('input');
+    practicePlayerFTACell.placeholder = 'Free Throws Attempted'
+    practicePlayerFTACell.type = 'text';
+
+    var practicePlayerFTMCell = document.createElement('input');
+    practicePlayerFTMCell.placeholder = 'Free Throws Made'
+    practicePlayerFTMCell.type = 'text';
+
+    // Create options button for archiving and deleting
     var optionsCell = document.createElement('td');
     var optionsButton = document.createElement('button');
     optionsButton.textContent = 'Options';
@@ -138,6 +158,8 @@ function addPlayer() {
     
     // Append the player name data to the practice list row
     practiceNewRowData.appendChild(practicePlayerNameCell);
+    practiceNewRowData.appendChild(practicePlayerFTACell);
+    practiceNewRowData.appendChild(practicePlayerFTMCell);
 
     // Append the data row to the player list
     document.getElementById('player-list').appendChild(newRowData);
