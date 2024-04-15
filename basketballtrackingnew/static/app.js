@@ -1,4 +1,5 @@
 // Select the button to add players
+
 document.querySelector('.add_player_button').addEventListener('click', function() {
     addPlayer();
 });

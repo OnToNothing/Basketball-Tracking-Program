@@ -1,6 +1,7 @@
 // Empty
 //begin electron code
 // Modules to control application life and create native browser window
+
 const { app, BrowserWindow } = require('electron')
 const path = require('node:path')
 
@@ -129,6 +130,31 @@ function addPlayer() {
             return; // Exit the function if player already exists
         }
     }
+
+    // Create JSON object
+    var playerData = {
+        name: playerName,
+        year: playerYear,
+        number: playerNumber
+    };
+
+    // Send data to server using fetch API (assuming server at http://localhost:7000)
+    fetch('http://localhost:7000/addPlayer', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(playerData)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("Player added successfully!");
+        } else {
+            console.log("Error adding player!");
+        }
+    });
+
+
 
     // Create a new row for the player data
     var newRowData = document.createElement('tr');

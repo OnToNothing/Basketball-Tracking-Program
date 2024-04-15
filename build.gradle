@@ -19,6 +19,12 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     // Other dependencies
     implementation 'mysql:mysql-connector-java:8.0.26' // Use the latest version suitable for your MySQL server
+
+    implementation 'io.javalin:javalin:3.13.6'
+    implementation 'org.slf4j:slf4j-simple:1.7.30' // This is for logging
+    
+
+    
 }
 
 sourceCompatibility = '21.0.2'
