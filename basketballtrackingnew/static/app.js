@@ -345,6 +345,7 @@ function unarchivePlayer(playerName, playerYear, playerNumber) {
 function sortPlayerNumber() {
     var playerList = document.getElementById('player-list');
     var rows = playerList.getElementsByClassName('player-row');
+    
 
     var sortedRows = Array.from(rows).sort((a, b) => { 
         var aNumber = parseInt(a.getElementsByTagName('td')[2].textContent); 
