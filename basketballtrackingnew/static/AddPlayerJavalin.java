@@ -40,6 +40,7 @@ public class AddPlayerJavalin {
             stmt.executeUpdate();
             conn.close();
     
+            
             ctx.status(201); // Created
         } catch (Exception e) {
             e.printStackTrace();
