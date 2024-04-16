@@ -132,32 +132,13 @@
     background-color: #2c5282; /* Darker blue on hover */
   }
 
-  #DateOfPractice {
-    height: 5vh
-  }
-
-  #FreeThrows {
-    width: 32vh;
-    height: 5vh
-  }
-
-  #SuccessfulFreeThrows {
-    width: 32vh;
-    height: 5vh
-  }
-
   .homePage{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 10vh;
   }
-
-  #ThreePointers {
-    width: 33vh;
-    height: 5vh
-  }
-
+  
   .add_player_button {
     background-color: #3182ce; /* Blue */
       color: white;

@@ -93,43 +93,50 @@
 </div>
 
 <div class="practicePanel">
-  <h1 class="centered">Practices Logging Page </h1>
+  <h1 class="centered">Practice Date Selection </h1>
   <div class="homePage">
     <button onclick="goToHomePage()">Go to Home Page</button>
   </div>
   <script>
     function goToHomePage() {
-      document.querySelector('.rosterPanel').style.display = 'block';
       document.querySelector('.practicePanel').style.display = 'none';
+      document.querySelector('.rosterPanel').style.display = 'block';
+    }
+  </script>
+  <script>
+    function HidePracticeAndGoToNewPracticePage() {
+      document.querySelector('.practicePanel').style.display = 'none';
+      var date = document.getElementById("DateInput").value;
+      goToNewPracticePage(date);
+      document.getElementById("DateInput").value = "";
     }
   </script>
 
   <table>
-    <thead>
-      <tr>
-        <th class="w-[200px]">Players List:</th>
-      </tr>
-
-    </thead>
 </thead>
 <tbody id="practice-list">
+  <tr class="practice-player-row">
+    <td>
+      <span>Enter Date:</span>
+      
+    </td>
+    <td>
+      <input placeholder="MM-DD-YYYY" type="text" id="DateInput"/>
+    </td>
+
+    <td>
+      <button onclick="HidePracticeAndGoToNewPracticePage()">Go To Practice</button>
+    </td>
   <tr>
+    
     <hr>
-      <div class="input-container">
-        <!--Input fields for the user to enter information-->
-        <input id="DateOfPractice" placeholder="Enter Date of Practice" type="text" />
-        <input id="FreeThrows" placeholder="Enter Number of Free Throws Attempted" type="text" />
-        <input id="SuccessfulFreeThrows" placeholder="Enter Number of Successful Free Throws " type="text" />
-        <input id="ThreePointers" placeholder="Enter Number of Three Pointers Attempted" type="text" />
-        <button class="add_player_button">Add Practice Info to list</button>
-        <hr>
-      </div>
     </td>
   </tr>
 </tbody>
 
 
 <script src="/basketballtrackingnew/static/app.js"></script>
+<script src="/basketballtrackingnew/static/renderer.js"></script>
 
 </body>
 </html>
