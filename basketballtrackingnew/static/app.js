@@ -1,7 +1,10 @@
 // Select the button to add players
+
 document.querySelector('.add_player_button').addEventListener('click', function() {
     addPlayer();
 });
+
+document.querySelector('.addPlayerPanel').style.display = 'none';
 
 document.querySelector('.sort_player_number').addEventListener('click', function() {
     sortPlayerNumber();
@@ -14,7 +17,9 @@ document.querySelector('.sort_player_button').addEventListener('click', function
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.archivePanel').style.display = 'none';
     document.querySelector('.practicePanel').style.display = 'none';
+    
 })
+
 
 var newRowLabels = document.createElement('tr');
     newRowLabels.className = 'player-row';
@@ -25,6 +30,9 @@ var newRowLabels = document.createElement('tr');
 // Create table cells for labels
 var nameLabelCell = document.createElement('td');
 nameLabelCell.textContent = 'Name';
+
+var lastNameLabelCell = document.createElement('td');
+lastNameLabelCell.textContent = 'Last Name';
 
 var yearLabelCell = document.createElement('td');
 yearLabelCell.textContent = 'Year';
@@ -48,6 +56,7 @@ numberLabelCell.textContent = 'Number';
 
 // Append label cells to the row
 newRowLabels.appendChild(nameLabelCell);
+newRowLabels.appendChild(lastNameLabelCell);
 newRowLabels.appendChild(yearLabelCell);
 newRowLabels.appendChild(numberLabelCell);
 
@@ -74,11 +83,12 @@ practices = Array.from(practices)
 function addPlayer() {
     // Get the values of the input fields
     var playerName = document.getElementById("PlayerName").value;
+    var playerLastName = document.getElementById("PlayerLastName").value;
     var playerYear = document.getElementById("PlayerYear").value;
     var playerNumber = document.getElementById("PlayerNumber").value;
 
     // Check if any of the fields are empty
-    if (playerName === "" || playerYear === "" || playerNumber === "") {
+    if (playerName === "" || playerLastName === "" || playerYear === "" || playerNumber === "") {
         alert("Please fill out all fields before adding player data!");
         return; // Exit the function if any field is empty
     }
@@ -117,6 +127,9 @@ function addPlayer() {
     var playerNameCell = document.createElement('td');
     playerNameCell.textContent = playerName;
 
+    var playerLastNameCell = document.createElement('td');
+    playerLastNameCell.textContent = playerLastName;
+
     var playerYearCell = document.createElement('td');
     playerYearCell.textContent = playerYear;
 
@@ -153,7 +166,7 @@ function addPlayer() {
     var archivePlayerButton = document.createElement('button');
     archivePlayerButton.textContent = 'Archive Player Info';
     archivePlayerButton.addEventListener('click', function() {
-        archivePlayer(playerName, playerYear, playerNumber);
+        archivePlayer(playerName, playerLastName, playerYear, playerNumber);
         newRowData.remove(); // Remove the row when delete button is clicked
         newRowLabels.remove(); // Also remove the label row
         practiceNewRowData.remove(); // Remove the row from practice when delete button is clicked
@@ -183,7 +196,7 @@ function addPlayer() {
 
     // Append player data cells to the row
     newRowData.appendChild(playerNameCell);
-    
+    newRowData.appendChild(playerLastNameCell);
     newRowData.appendChild(playerYearCell);
     newRowData.appendChild(playerNumberCell);
     newRowData.appendChild(optionsCell);
@@ -202,6 +215,7 @@ function addPlayer() {
 
     // Clear input fields after adding player
     document.getElementById("PlayerName").value = "";
+    document.getElementById("PlayerLastName").value = "";
     document.getElementById("PlayerYear").value = "";
     document.getElementById("PlayerNumber").value = "";
 }
@@ -221,7 +235,7 @@ function sortPlayer() {
     }
 }
 
-function archivePlayer(playerName, playerYear, playerNumber) {
+function archivePlayer(playerName, playerLastName, playerYear, playerNumber) {
 
 // Create a new row for the player
 var newRowLabels = document.createElement('tr');
@@ -231,6 +245,9 @@ newRowLabels.className = 'player-row';
 var nameLabelCell = document.createElement('td');
 nameLabelCell.textContent = 'Name';
 
+var lastNameLabelCell = document.createElement('td');
+lastNameLabelCell.textContent = 'Last Name';
+
 var yearLabelCell = document.createElement('td');
 yearLabelCell.textContent = 'Year';
 
@@ -239,6 +256,7 @@ numberLabelCell.textContent = 'Number';
 
 // Append label cells to the row
 newRowLabels.appendChild(nameLabelCell);
+newRowLabels.appendChild(lastNameLabelCell);
 newRowLabels.appendChild(yearLabelCell);
 newRowLabels.appendChild(numberLabelCell);
 
@@ -252,6 +270,9 @@ newRowData.className = 'player-row';
 // Create table cells for player data
 var playerNameCell = document.createElement('td');
 playerNameCell.textContent = playerName;
+
+var playerLastNameCell = document.createElement('td');
+playerLastNameCell.textContent = playerLastName;
 
 var playerYearCell = document.createElement('td');
 playerYearCell.textContent = playerYear;
@@ -288,6 +309,7 @@ optionsCell.appendChild(optionsButton);
 
 // Append player data cells to the row
 newRowData.appendChild(playerNameCell);
+newRowData.appendChild(playerLastNameCell);
 newRowData.appendChild(playerYearCell);
 newRowData.appendChild(playerNumberCell);
 newRowData.appendChild(optionsCell);
@@ -297,7 +319,7 @@ document.getElementById('archived_player-list').appendChild(newRowData);
 
 }
 
-function unarchivePlayer(playerName, playerYear, playerNumber) {
+function unarchivePlayer(playerName, playerLastName, playerYear, playerNumber) {
 
     // Create a new row for the player
     var newRowLabels = document.createElement('tr');
@@ -307,6 +329,9 @@ function unarchivePlayer(playerName, playerYear, playerNumber) {
     var nameLabelCell = document.createElement('td');
     nameLabelCell.textContent = 'Name';
 
+    var lastNameLabelCell = document.createElement('td');
+    lastNameLabelCell.textContent = 'Last Name';
+
     var yearLabelCell = document.createElement('td');
     yearLabelCell.textContent = 'Year';
 
@@ -315,6 +340,7 @@ function unarchivePlayer(playerName, playerYear, playerNumber) {
 
     // Append label cells to the row
     newRowLabels.appendChild(nameLabelCell);
+    newRowLabels.appendChild(lastNameLabelCell);
     newRowLabels.appendChild(yearLabelCell);
     newRowLabels.appendChild(numberLabelCell);
 
@@ -328,6 +354,9 @@ function unarchivePlayer(playerName, playerYear, playerNumber) {
     // Create table cells for player data
     var playerNameCell = document.createElement('td');
     playerNameCell.textContent = playerName;
+
+    var playerLastNameCell = document.createElement('td');
+    playerLastNameCell.textContent = playerLastName;
 
     var playerYearCell = document.createElement('td');
     playerYearCell.textContent = playerYear;
@@ -346,7 +375,7 @@ function unarchivePlayer(playerName, playerYear, playerNumber) {
     var archivePlayerButton = document.createElement('button');
     archivePlayerButton.textContent = 'Archive Player Info';
     archivePlayerButton.addEventListener('click', function() {
-        archivePlayer(playerName, playerYear, playerNumber);
+        archivePlayer(playerName, playerLastName, playerYear, playerNumber);
         newRowData.remove(); // Remove the row when delete button is clicked
         newRowLabels.remove(); // Also remove the label row
     });
@@ -366,6 +395,7 @@ function unarchivePlayer(playerName, playerYear, playerNumber) {
 
     // Append player data cells to the row
     newRowData.appendChild(playerNameCell);
+    newRowData.appendChild(playerLastNameCell);
     newRowData.appendChild(playerYearCell);
     newRowData.appendChild(playerNumberCell);
     newRowData.appendChild(optionsCell);
@@ -375,6 +405,7 @@ function unarchivePlayer(playerName, playerYear, playerNumber) {
 
     // Clear input fields after adding player
     document.getElementById("PlayerName").value = "";
+    document.getElementById("PlayerLastName").value = "";
     document.getElementById("PlayerYear").value = "";
     document.getElementById("PlayerNumber").value = "";
 }
@@ -384,8 +415,8 @@ function sortPlayerNumber() {
     var rows = playerList.getElementsByClassName('player-row');
 
     var sortedRows = Array.from(rows).sort((a, b) => { 
-        var aNumber = parseInt(a.getElementsByTagName('td')[2].textContent); 
-        var bNumber = parseInt(b.getElementsByTagName('td')[2].textContent);
+        var aNumber = parseInt(a.getElementsByTagName('td')[3].textContent); 
+        var bNumber = parseInt(b.getElementsByTagName('td')[3].textContent);
         return aNumber - bNumber;
     });
 
