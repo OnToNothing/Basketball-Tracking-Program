@@ -170,6 +170,7 @@ function addPlayer() {
     newRowData.appendChild(optionsCell);
     
     // Append the player name data to the practice list row
+    
     practiceNewRowData.appendChild(practicePlayerLastNameCell);
     practiceNewRowData.appendChild(practicePlayerFTACell);
     practiceNewRowData.appendChild(practicePlayerFTMCell);
