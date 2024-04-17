@@ -118,6 +118,7 @@ document.querySelector('.sort_player_number').addEventListener('click', function
 });
 
 var names = []
+var lastNames = []
 
 var practices = document.querySelectorAll('.Practice')
 practices = Array.from(practices)
@@ -128,6 +129,7 @@ function addPlayer() {
     var playerLastName = document.getElementById("PlayerLastName").value;
     var playerYear = document.getElementById("PlayerYear").value;
     var playerNumber = document.getElementById("PlayerNumber").value;
+    console.log("Player last name: " + playerLastName)
 
     // Check if any of the fields are empty
     if (playerName === "" || playerLastName === "" || playerYear === "" || playerNumber === "") {
@@ -140,24 +142,26 @@ function addPlayer() {
     var rows = playerList.getElementsByClassName('player-data-row');
     for (var i = 0; i < rows.length; i++) {
         var nameCell = rows[i].getElementsByTagName('td')[0];
-        var yearCell = rows[i].getElementsByTagName('td')[1];
-        var numberCell = rows[i].getElementsByTagName('td')[2];
-        if (nameCell.textContent === playerName && yearCell.textContent === playerYear && numberCell.textContent === playerNumber) {
+        var lastNameCell = rows[i].getElementsByTagName('td')[1];
+        var yearCell = rows[i].getElementsByTagName('td')[2];
+        var numberCell = rows[i].getElementsByTagName('td')[3];
+        if (nameCell.textContent === playerName && lastNameCell.textContent === playerLastName && yearCell.textContent === playerYear && numberCell.textContent === playerNumber) {
             alert("Player already exists!");
             return; // Exit the function if player already exists
         }
     }
 
     names.push(playerName) // Adds the player to the list of names
+    lastNames.push(playerLastName) // Adds the player to the list of last names
     // Add the player to any existing practices
     console.log(practices)
     for (i = 0; i < practices.length; i++) {
         console.log(practices[i].id.split('Practice-')[1])
-        
-        addPlayerToNewPractice(practices[i].id.split('Practice-')[1].split('practicePanel')[0], playerName)
+        console.log("Last name for player: " + playerLastName)
+        addPlayerToNewPractice(practices[i].id.split('Practice-')[1].split('practicePanel')[0], playerName, playerLastName)
     }
 
-    // Create JSON object
+    /*// Create JSON object
     var playerData = {
         name: playerName,
         year: playerYear,
@@ -178,7 +182,7 @@ function addPlayer() {
         } else {
             console.log("Error adding player!");
         }
-    });
+    });*/
 
     // Create a new row for the player data
     var newRowData = document.createElement('tr');
@@ -235,9 +239,10 @@ function addPlayer() {
         newRowData.remove(); // Remove the row when delete button is clicked
         newRowLabels.remove(); // Also remove the label row
         practiceNewRowData.remove(); // Remove the row from practice when delete button is clicked
-        names.remove(playerName) // Removes the player from the list of names
+        names.splice(names.indexOf(playerName), 1) // Removes the player from the list of names
+        lastNames.splice(lastNames.indexOf(playerLastName), 1) // Removes the player from the list of last names
         for (i = 0; i < practices.length; i++) {
-            removePlayerFromNewPractice(practices[i].id.split('Practice-')[1].split('practicePanel')[0], playerName)
+            removePlayerFromNewPractice(practices[i].id.split('Practice-')[1].split('practicePanel')[0], playerName, playerLastName)
         }
     });
 
@@ -247,9 +252,10 @@ function addPlayer() {
         newRowData.remove(); // Remove the row when delete button is clicked
         newRowLabels.remove(); // Also remove the label row
         practiceNewRowData.remove(); // Remove the row from practice when delete button is clicked
-        names.remove(playerName) // Removes the player from the list of names
+        names.splice(names.indexOf(playerName), 1) // Removes the player from the list of names
+        lastNames.splice(lastNames.indexOf(playerLastName), 1) // Removes the player from the list of last names
         for (i = 0; i < practices.length; i++) {
-            removePlayerFromNewPractice(practices[i].id.split('Practice-')[1].split('practicePanel')[0], playerName)
+            removePlayerFromNewPractice(practices[i].id.split('Practice-')[1].split('practicePanel')[0], playerName, playerLastName)
         }
     });
 
@@ -302,85 +308,85 @@ function sortPlayer() {
 
 function archivePlayer(playerName, playerLastName, playerYear, playerNumber) {
 
-// Create a new row for the player
-var newRowLabels = document.createElement('tr');
-newRowLabels.className = 'player-row';
+    // Create a new row for the player
+    var newRowLabels = document.createElement('tr');
+    newRowLabels.className = 'player-row';
 
-// Create table cells for labels
-var nameLabelCell = document.createElement('td');
-nameLabelCell.textContent = 'Name';
+    // Create table cells for labels
+    var nameLabelCell = document.createElement('td');
+    nameLabelCell.textContent = 'Name';
 
-var lastNameLabelCell = document.createElement('td');
-lastNameLabelCell.textContent = 'Last Name';
+    var lastNameLabelCell = document.createElement('td');
+    lastNameLabelCell.textContent = 'Last Name';
 
-var yearLabelCell = document.createElement('td');
-yearLabelCell.textContent = 'Year';
+    var yearLabelCell = document.createElement('td');
+    yearLabelCell.textContent = 'Year';
 
-var numberLabelCell = document.createElement('td');
-numberLabelCell.textContent = 'Number';
+    var numberLabelCell = document.createElement('td');
+    numberLabelCell.textContent = 'Number';
 
-// Append label cells to the row
-newRowLabels.appendChild(nameLabelCell);
-newRowLabels.appendChild(lastNameLabelCell);
-newRowLabels.appendChild(yearLabelCell);
-newRowLabels.appendChild(numberLabelCell);
+    // Append label cells to the row
+    newRowLabels.appendChild(nameLabelCell);
+    newRowLabels.appendChild(lastNameLabelCell);
+    newRowLabels.appendChild(yearLabelCell);
+    newRowLabels.appendChild(numberLabelCell);
 
-// Append the label row to the player list
-document.getElementById('archived_player-list').appendChild(newRowLabels);
+    // Append the label row to the player list
+    document.getElementById('archived_player-list').appendChild(newRowLabels);
 
-// Create a new row for the player data
-var newRowData = document.createElement('tr');
-newRowData.className = 'player-row';
+    // Create a new row for the player data
+    var newRowData = document.createElement('tr');
+    newRowData.className = 'player-row';
 
-// Create table cells for player data
-var playerNameCell = document.createElement('td');
-playerNameCell.textContent = playerName;
+    // Create table cells for player data
+    var playerNameCell = document.createElement('td');
+    playerNameCell.textContent = playerName;
 
-var playerLastNameCell = document.createElement('td');
-playerLastNameCell.textContent = playerLastName;
+    var playerLastNameCell = document.createElement('td');
+    playerLastNameCell.textContent = playerLastName;
 
-var playerYearCell = document.createElement('td');
-playerYearCell.textContent = playerYear;
+    var playerYearCell = document.createElement('td');
+    playerYearCell.textContent = playerYear;
 
-var playerNumberCell = document.createElement('td');
-playerNumberCell.textContent = playerNumber;
+    var playerNumberCell = document.createElement('td');
+    playerNumberCell.textContent = playerNumber;
 
-var optionsCell = document.createElement('td');
-var optionsButton = document.createElement('button');
-optionsButton.textContent = 'Options';
-optionsButton.className = 'options-button';
+    var optionsCell = document.createElement('td');
+    var optionsButton = document.createElement('button');
+    optionsButton.textContent = 'Options';
+    optionsButton.className = 'options-button';
 
-var optionsDropdown = document.createElement('div');
-optionsDropdown.className = 'dropdown-content';
+    var optionsDropdown = document.createElement('div');
+    optionsDropdown.className = 'dropdown-content';
 
 
-var unarchiveButton = document.createElement('button');
-unarchiveButton.textContent = 'Unarchive Player';
-unarchiveButton.addEventListener('click', function() {
-    newRowData.remove(); // Remove the row when delete button is clicked
-    newRowLabels.remove(); // Also remove the label row
-    unarchivePlayer(playerName, playerYear, playerNumber);
-    names.push(playerName) // Adds the player to the list of names
-    for (i = 0; i < practices.length; i++) {
-        console.log(practices[i].id.split('-')[1])
-        addPlayerToNewPractice(practices[i].id.split('Practice-')[1].split('practicePanel')[0], playerName)
-    }
-});
+    var unarchiveButton = document.createElement('button');
+    unarchiveButton.textContent = 'Unarchive Player';
+    unarchiveButton.addEventListener('click', function() {
+        newRowData.remove(); // Remove the row when delete button is clicked
+        newRowLabels.remove(); // Also remove the label row
+        unarchivePlayer(playerName, playerLastName, playerYear, playerNumber);
+        names.push(playerName) // Adds the player to the list of names
+        for (i = 0; i < practices.length; i++) {
+            console.log(practices[i].id.split('-')[1])
+            addPlayerToNewPractice(practices[i].id.split('Practice-')[1].split('practicePanel')[0], playerName, playerLastName)
+        }
+    });
 
-optionsDropdown.appendChild(unarchiveButton);
+    optionsDropdown.appendChild(unarchiveButton);
 
-optionsButton.appendChild(optionsDropdown);
-optionsCell.appendChild(optionsButton);
+    optionsButton.appendChild(optionsDropdown);
+    optionsCell.appendChild(optionsButton);
 
-// Append player data cells to the row
-newRowData.appendChild(playerNameCell);
-newRowData.appendChild(playerLastNameCell);
-newRowData.appendChild(playerYearCell);
-newRowData.appendChild(playerNumberCell);
-newRowData.appendChild(optionsCell);
+    // Append player data cells to the row
+    newRowData.appendChild(playerNameCell);
+    newRowData.appendChild(playerLastNameCell);
+    newRowData.appendChild(playerYearCell);
+    newRowData.appendChild(playerNumberCell);
+    newRowData.appendChild(optionsCell);
 
-// Append the data row to the player list
-document.getElementById('archived_player-list').appendChild(newRowData);
+    // Append the data row to the player list
+    document.getElementById('archived_player-list').appendChild(newRowData);
 
 }
 
@@ -535,6 +541,7 @@ function createNewPractice(date) {
     goToHomePageButton.onclick = function() {
         document.querySelector('.rosterPanel').style.display = 'block';
         document.querySelector('.practicePanel').style.display = 'none';
+        makeArchiveAndPracticeButtonVisible()
         practicePanelDiv.style.display = 'none';
     };
   
@@ -584,6 +591,9 @@ function createNewPractice(date) {
     var practiceNameLabelCell = document.createElement('td');
     practiceNameLabelCell.textContent = 'Name';
 
+    var practiceLastNameLabelCell = document.createElement('td');
+    practiceLastNameLabelCell.textContent = 'Last Name';
+
     var practiceFTACell = document.createElement('td');
     practiceFTACell.textContent = 'FTA';
 
@@ -591,6 +601,7 @@ function createNewPractice(date) {
     practiceFTMCell.textContent = 'FTM';
 
     newPracticeRowLabel.appendChild(practiceNameLabelCell);
+    newPracticeRowLabel.appendChild(practiceLastNameLabelCell);
     newPracticeRowLabel.appendChild(practiceFTACell);
     newPracticeRowLabel.appendChild(practiceFTMCell);
 
@@ -598,7 +609,7 @@ function createNewPractice(date) {
     document.getElementById(`Practice-${date}practice-list`).appendChild(newPracticeRowLabel);
 
     for (i = 0; i < names.length; i++) {
-        addPlayerToNewPractice(date, names[i])
+        addPlayerToNewPractice(date, names[i], lastNames[i])
     }
     console.log("Practices: ", practices)
     practices = document.querySelectorAll('.Practice')
@@ -606,7 +617,7 @@ function createNewPractice(date) {
     console.log("Practices now: ", practices)
 }
 
-function addPlayerToNewPractice(date, playerName) {
+function addPlayerToNewPractice(date, playerName, playerLastName) {
 
     // Create a new row for the player data in the practice page
     var practiceNewRowData = document.createElement('tr');
@@ -615,6 +626,10 @@ function addPlayerToNewPractice(date, playerName) {
     // Create table cells for player data in the practice page
     var practicePlayerNameCell = document.createElement('td');
     practicePlayerNameCell.textContent = playerName;
+
+    var practicePlayerLastNameCell = document.createElement('td');
+    console.log("The player last name should be: " + playerLastName)
+    practicePlayerLastNameCell.textContent = playerLastName;
 
     // Input fields for Free throws and Free throws made
     var practicePlayerFTACell = document.createElement('input');
@@ -627,6 +642,7 @@ function addPlayerToNewPractice(date, playerName) {
 
     // Append the player name data to the practice list row
     practiceNewRowData.appendChild(practicePlayerNameCell);
+    practiceNewRowData.appendChild(practicePlayerLastNameCell);
     practiceNewRowData.appendChild(practicePlayerFTACell);
     practiceNewRowData.appendChild(practicePlayerFTMCell);
 
@@ -636,7 +652,8 @@ function addPlayerToNewPractice(date, playerName) {
     document.getElementById(`Practice-${date}practice-list`).appendChild(practiceNewRowData);
 }
 
-function removePlayerFromNewPractice(date, playerName) {
+// May have to fix this function
+function removePlayerFromNewPractice(date, playerName, playerLastName) {
     var practiceList = document.getElementById(`Practice-${date}practice-list`);
     var rows = practiceList.getElementsByClassName('practice-player-data-row');
 
@@ -646,4 +663,12 @@ function removePlayerFromNewPractice(date, playerName) {
             rows[i].remove(); // Remove the row when delete button is clicked
         }
     }
+
+    for (var i = 0; i < rows.length; i++) {
+        var lastNameCell = rows[i].getElementsByTagName('td')[1];
+        if (lastNameCell.textContent === playerLastName) {
+            rows[i].remove(); // Remove the row when delete button is clicked
+        }
+    }
+
 }

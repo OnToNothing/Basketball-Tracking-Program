@@ -78,7 +78,8 @@
     <input id="PlayerYear" placeholder="Enter Player Year" type="text" />
     <input id="PlayerNumber" placeholder="Enter Player Number" type="text" />
     <button onclick="goToHomePage()" class="add_player_button">Add Player</button> 
-      
+  </div>
+</div> 
 
 <div class="archivePanel">
   <h1 class="centered">Archived Players Page</h1>
@@ -136,6 +137,8 @@
 
     function goToHomePage() {
       document.querySelector('.practicePanel').style.display = 'none';
+      document.querySelector('.addPlayerPanel').style.display = 'none';
+      document.querySelector('.input-container').style.display = 'none';
       document.querySelector('.rosterPanel').style.display = 'block';
       makeArchiveAndPracticeButtonVisible();
     }
