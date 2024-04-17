@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Basketball Tracking</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="static/style.css">
   
 </head>
 <body>
@@ -78,9 +78,7 @@
     <input id="PlayerYear" placeholder="Enter Player Year" type="text" />
     <input id="PlayerNumber" placeholder="Enter Player Number" type="text" />
     <button onclick="goToHomePage()" class="add_player_button">Add Player</button> 
-  </div>
-  <button onclick="goToHomePage()" class="home">Go to Home Page</button>
- </div>       
+      
 
 <div class="archivePanel">
   <h1 class="centered">Archived Players Page</h1>
@@ -139,6 +137,7 @@
     function goToHomePage() {
       document.querySelector('.practicePanel').style.display = 'none';
       document.querySelector('.rosterPanel').style.display = 'block';
+      makeArchiveAndPracticeButtonVisible();
     }
   </script>
   <script>
@@ -173,7 +172,7 @@
 </tbody>
 
 
-<script src="/basketballtrackingnew/static/app.js"></script>
+<script src="/basketballtrackingnew/main.js"></script>
 <script src="/basketballtrackingnew/static/renderer.js"></script>
 
 </body>

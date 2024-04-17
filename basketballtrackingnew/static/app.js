@@ -1,3 +1,45 @@
+/*const { app, BrowserWindow } = require('electron')
+const path = require('node:path')
+
+function createWindow () {
+  // Create the browser window.
+  const mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js')
+    }
+  })
+
+  // and load the index.html of the app.
+  mainWindow.loadFile('index.html')
+
+  // Open the DevTools.
+  // mainWindow.webContents.openDevTools()
+}
+
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.whenReady().then(() => {
+  createWindow()
+
+  app.on('activate', function () {
+    // On macOS it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  })
+})
+
+// Quit when all windows are closed, except on macOS. There, it's common
+// for applications and their menu bar to stay active until the user quits
+// explicitly with Cmd + Q.
+app.on('window-all-closed', function () {
+  if (process.platform !== 'darwin') app.quit()
+})
+
+//end electron code*/
+
 // Select the button to add players
 
 document.querySelector('.add_player_button').addEventListener('click', function() {
@@ -114,6 +156,29 @@ function addPlayer() {
         
         addPlayerToNewPractice(practices[i].id.split('Practice-')[1].split('practicePanel')[0], playerName)
     }
+
+    // Create JSON object
+    var playerData = {
+        name: playerName,
+        year: playerYear,
+        number: playerNumber
+    };
+
+    // Send data to server using fetch API (assuming server at http://localhost:7000)
+    fetch('http://localhost:7000/addPlayer', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(playerData)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("Player added successfully!");
+        } else {
+            console.log("Error adding player!");
+        }
+    });
 
     // Create a new row for the player data
     var newRowData = document.createElement('tr');
