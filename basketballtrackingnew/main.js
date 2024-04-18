@@ -367,6 +367,7 @@ function archivePlayer(playerName, playerLastName, playerYear, playerNumber) {
         newRowLabels.remove(); // Also remove the label row
         unarchivePlayer(playerName, playerLastName, playerYear, playerNumber);
         names.push(playerName) // Adds the player to the list of names
+        lastNames.push(playerLastName) // Adds the player to the list of last names
         for (i = 0; i < practices.length; i++) {
             console.log(practices[i].id.split('-')[1])
             addPlayerToNewPractice(practices[i].id.split('Practice-')[1].split('practicePanel')[0], playerName, playerLastName)
