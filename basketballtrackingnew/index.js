@@ -1,3 +1,47 @@
+/*const { app, BrowserWindow } = require('electron')
+const path = require('node:path')
+
+function createWindow () {
+  // Create the browser window.
+  const mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js')
+    }
+  })
+
+  // and load the index.html of the app.
+  mainWindow.loadFile('index.html')
+
+  // Open the DevTools.
+  // mainWindow.webContents.openDevTools()
+}
+
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.whenReady().then(() => {
+  createWindow()
+
+  app.on('activate', function () {
+    // On macOS it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  })
+})
+
+// Quit when all windows are closed, except on macOS. There, it's common
+// for applications and their menu bar to stay active until the user quits
+// explicitly with Cmd + Q.
+app.on('window-all-closed', function () {
+  if (process.platform !== 'darwin') app.quit()
+})
+
+//end electron code*/
+
+// Select the button to add players
+
 document.querySelector('.add_player_button').addEventListener('click', function() {
     addPlayer();
 });
@@ -557,10 +601,19 @@ function createNewPractice(date) {
     var practiceFTMCell = document.createElement('td');
     practiceFTMCell.textContent = 'FTM';
 
+    //TEST
+    var practiceTPACell = document.createElement('td');
+    practiceTPACell.textContent = 'TPA';
+
+    var practiceTPMCell = document.createElement('td');
+    practiceTPMCell.textContent = 'TPM';
+
     newPracticeRowLabel.appendChild(practiceNameLabelCell);
     newPracticeRowLabel.appendChild(practiceLastNameLabelCell);
     newPracticeRowLabel.appendChild(practiceFTACell);
     newPracticeRowLabel.appendChild(practiceFTMCell);
+    newPracticeRowLabel.appendChild(practiceTPACell);
+    newPracticeRowLabel.appendChild(practiceTPMCell);
 
     //Attempting to add row data to the practice page as well
     document.getElementById(`Practice-${date}practice-list`).appendChild(newPracticeRowLabel);
@@ -597,11 +650,22 @@ function addPlayerToNewPractice(date, playerName, playerLastName) {
     practicePlayerFTMCell.placeholder = 'Free Throws Made'
     practicePlayerFTMCell.type = 'text';
 
+    //TEST
+    var practicePlayerTPACell = document.createElement('input');
+    practicePlayerTPACell.placeholder = 'Three Pointers Attempted'
+    practicePlayerTPACell.type = 'text';
+
+    var practicePlayerTPMCell = document.createElement('input');
+    practicePlayerTPMCell.placeholder = 'Three Pointers Made'
+    practicePlayerTPMCell.type = 'text';
+
     // Append the player name data to the practice list row
     practiceNewRowData.appendChild(practicePlayerNameCell);
     practiceNewRowData.appendChild(practicePlayerLastNameCell);
     practiceNewRowData.appendChild(practicePlayerFTACell);
     practiceNewRowData.appendChild(practicePlayerFTMCell);
+    practiceNewRowData.appendChild(practicePlayerTPACell);
+    practiceNewRowData.appendChild(practicePlayerTPMCell);
 
     // Attempt to add the data row to the practice list
     console.log("The date should be: " + date)
