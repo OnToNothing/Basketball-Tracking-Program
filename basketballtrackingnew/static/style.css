@@ -110,7 +110,7 @@
   }
 
   
-  .sort_player_button, .sort_player_number, .archive, .practice, .home, .add_player_page, .add_player_button {
+  .sort_player_button, .sort_player_number, .archive, .practice, .home, .add_player_page, .add_player_button, .go_to_practice {
     background-color: #3182ce; /* Blue */
       color: white;
       border: none;
@@ -123,7 +123,7 @@
       font-size: medium;
   }
 
-  .sort_player_button:hover, .sort_player_number:hover, .archive:hover, .practice:hover, .home:hover, .add_player_page:hover, .add_player_button:hover {
+  .sort_player_button:hover, .sort_player_number:hover, .archive:hover, .practice:hover, .home:hover, .add_player_page:hover, .add_player_button:hover, .go_to_practice:hover {
     background-color: #2c5282; /* Darker blue on hover */
   }
 
