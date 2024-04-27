@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball Stat Tracker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="#">Team Management</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="frontpage.html">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="rosterpage.html">Roster</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="stats.html">Player Stats</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="practicepage.html">Practice</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+    <header class="bg-primary py-4 shadow-sm">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Logo and Title -->
+                <div class="col-md-8">
+                    <h1 class="text-white h1">Basketball Stat Tracker</h1>
+                </div>
+                <!-- Buttons -->
+                <div class="col-md-4 text-right">
+                    <button class="btn btn-light mr-2" type="button">Player Stats</button>
+                    <button class="btn btn-light" type="button">Team Stats</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container mt-4">
+        <div class="bg-white p-3 shadow-sm rounded">
+            <form class="form-inline justify-content-center">
+                <input class="form-control mr-2" type="date" id="start-date" name="start-date">
+                <input class="form-control mr-2" type="date" id="end-date" name="end-date">
+                <button class="btn btn-primary" type="submit">Filter</button>
+            </form>
+        </div>
+    </div>
+    <main class="container mt-4">
+        <!-- Track New Practice Button -->
+    <div class="container my-4">
+        <div class="text-center">
+            <button class="btn btn-success mb-3">Track New Practice</button>
+        </div>
+        <!-- Divider Line -->
+        <hr>
+    </div>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+            <!-- Day Stat Card -->
+            <div class="col mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">April 1, 2023</h5>
+                        <p class="card-text">Total Practices: 12</p>
+                        <p class="card-text">Unique Players: 25</p>
+                        <p class="card-text">Attendance Rate: 85%</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat for other days -->
+            <div class="col mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">April 2, 2023</h5>
+                        <p class="card-text">Total Practices: 15</p>
+                        <p class="card-text">Unique Players: 30</p>
+                        <p class="card-text">Attendance Rate: 90%</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+    
+</body>
+</html>

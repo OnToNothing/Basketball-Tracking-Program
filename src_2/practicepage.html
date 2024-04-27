@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Stats Tracker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="#">Team Management</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="frontpage.html">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="rosterpage.html">Roster</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="stats.html">Player Stats</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="practicepage.html">Practice</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+    <div class="container mt-5">
+        <div class="mb-4">
+            <h2 class="text-center bg-primary text-white p-2">Player Stats Tracker</h2>
+            <h4 class="text-center my-3">April 25, 2024</h4>
+        </div>
+
+        <table class="table" id="statsTable">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Player</th>
+                    <th scope="col">Number</th>
+                    <th scope="col">Free Throw Attempts</th>
+                    <th scope="col">Free Throws Made</th>
+                    <th scope="col">Shot Percentage</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="playerStatsBody">
+                <!-- Players will be added here -->
+            </tbody>
+        </table>
+
+        <div class="text-right">
+            <button class="btn btn-primary" id="saveStats">Save</button>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="playerStats.js"></script>
+</body>
+</html>
