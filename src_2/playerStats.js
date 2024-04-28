@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Event listener for the save button
-    document.getElementById('saveStats').addEventListener('click', function() {
+    document.getElementById('save-roster-btn').addEventListener('click', function() {
         // Save player stats to local storage or send to server
         alert('Stats saved!');
         // Placeholder for actual save functionality
