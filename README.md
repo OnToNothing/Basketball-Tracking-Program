@@ -15,9 +15,9 @@ Clone the repository from GitHub.
 
 Open the repository in VSCode
 
-Navigate to the basketballtrackingnew folder in the repository.
+Navigate to the src_2 folder in the repository.
 
-Navigate to the index.html file.
+Navigate to the frontpage.html file.
 
 In the bottom right corner, click the button that says Live Server
 
