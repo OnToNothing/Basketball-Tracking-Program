@@ -91,3 +91,37 @@ players = players.filter(player => player.firstName !== playerToRemove.firstName
 // Save the updated players array back to local storage
 localStorage.setItem('players', JSON.stringify(players));
 }
+
+// roster.js
+
+$(document).ready(function() {
+  // Function to add a new player to the player stats table
+  function addPlayerToStats(firstName, lastName) {
+      // Assuming you have jQuery loaded
+      // Find the player stats table body
+      var $tbody = $('#player-stats-table tbody');
+
+      // Construct a new row with the player's information
+      var newRow = '<tr>' +
+          '<td>' + firstName + ' ' + lastName + '</td>' +
+          '<td><input type="number" class="form-control" placeholder="Goals"></td>' +
+          '<td><input type="number" class="form-control" placeholder="Assists"></td>' +
+          '<td><input type="number" class="form-control" placeholder="Yellow Cards"></td>' +
+          '<td><input type="number" class="form-control" placeholder="Red Cards"></td>' +
+          '</tr>';
+
+      // Append the new row to the table body
+      $tbody.append(newRow);
+  }
+
+  // Event listener for the "Add Player" button click
+  $('.btn-outline-primary').click(function() {
+      // Get the input values from the form
+      var firstName = $('input[placeholder="First Name"]').val();
+      var lastName = $('input[placeholder="Last Name"]').val();
+
+      // Add the new player to the player stats table
+      addPlayerToStats(firstName, lastName);
+  });
+});
+
