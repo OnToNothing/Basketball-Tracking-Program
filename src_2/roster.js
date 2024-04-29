@@ -45,30 +45,41 @@ function addRoster(rosterName) {
 
 // Function to add player to the list in the DOM and to the database
 function addPlayerToList(player) {
-  var listItem = document.createElement('li');
-  listItem.className = 'list-group-item';
-  listItem.innerHTML = `
-      <div class="row">
-          <div class="col-md-3">${player.firstName}</div>
-          <div class="col-md-3">${player.lastName}</div>
-          <div class="col-md-3">${player.position}</div>
-          <div class="col-md-2">${player.number}</div>
-          <div class="col-md-1 d-flex justify-content-end">
-              <button class="btn btn-outline-danger btn-sm delete-btn">
-                  <i class="fa fa-trash" aria-hidden="true"></i>
-              </button>
-          </div>
-      </div>
-  `;
-
-  // Add event listener for the delete button in this row
-  listItem.querySelector('.delete-btn').addEventListener('click', function() {
-      listItem.remove(); // Remove the list item from the DOM
-      console.log("Player removed from the list");
-  });
-
-  document.getElementById('player-list').appendChild(listItem);
-}
+    var listItem = document.createElement('li');
+    listItem.className = 'list-group-item';
+    listItem.innerHTML = `
+        <div class="row">
+            <div class="col-md-3">${player.firstName}</div>
+            <div class="col-md-3">${player.lastName}</div>
+            <div class="col-md-3">${player.position}</div>
+            <div class="col-md-2">${player.number}</div>
+            <div class="col-md-1 d-flex justify-content-end">
+                <button class="btn btn-outline-danger btn-sm delete-btn">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+                <button class="btn btn-outline-primary btn-sm ml-1 archive-btn">
+                    Archive
+                </button>
+            </div>
+        </div>
+    `;
+  
+    // Add event listener for the delete button in this row
+    listItem.querySelector('.delete-btn').addEventListener('click', function() {
+        listItem.remove(); // Remove the list item from the DOM
+        console.log("Player removed from the list");
+    });
+  
+    // Add event listener for the archive button in this row
+    listItem.querySelector('.archive-btn').addEventListener('click', function() {
+        // Mark the player as archived (for example, by adding a data attribute)
+        listItem.setAttribute("isArchived", "true");
+        console.log("Player archived");
+    });
+  
+    document.getElementById('player-list').appendChild(listItem);
+  }
+  
 
 
 document.querySelector('.btn-outline-primary').addEventListener('click', function() {
