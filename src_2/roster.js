@@ -1,127 +1,123 @@
-document.querySelector('.btn-outline-primary').addEventListener('click', function() {
-    // Get the input values
-    var firstName = document.querySelector('input[placeholder="First Name"]').value.trim();
-    var lastName = document.querySelector('input[placeholder="Last Name"]').value.trim();
-    var position = document.querySelector('input[placeholder="Position"]').value.trim();
-    var number = document.querySelector('input[placeholder="Number"]').value.trim();
 
-    // Validation messages
-    var validationMessages = [];
-    
-    // Validate the input values
-    if (!firstName || firstName.length > 60) {
-      validationMessages.push("First name cannot be blank or more than 60 characters.");
-    }
-  
-    if (!lastName || lastName.length > 60) {
-      validationMessages.push("Last name cannot be blank or more than 60 characters.");
-    }
-  
-    if (!position || position.length > 60) {
-      validationMessages.push("Position cannot be blank or more than 60 characters.");
-    }
-  
-    if (!number || number.length > 4 || isNaN(number)) {
-      validationMessages.push("Year must be a number and cannot be more than 4 characters.");
-    }
-  
-    // If there are validation messages, join them and show alert, then return without adding a new row
-    if (validationMessages.length > 0) {
-      alert(validationMessages.join("\n"));
-      return;
-    }
-  // Create player object
-  var player = {
-    firstName: firstName,
-    lastName: lastName,
-    position: position,
-    number: number
-};
+var db;
 
-// Retrieve the existing players from local storage, parse it, and add new player to the array
-var players = JSON.parse(localStorage.getItem('players') || '[]');
-players.push(player);
-localStorage.setItem('players', JSON.stringify(players));
+// Open or create the database
+function openDatabase() {
+    var request = indexedDB.open("TeamManagementDB", 1);
 
-// Add the new player to the list on the page
-addPlayerToList(player);
+    request.onupgradeneeded = function(event) {
+        db = event.target.result;
+        if (!db.objectStoreNames.contains('rosters')) {
+            var objectStore = db.createObjectStore('rosters', { keyPath: 'id', autoIncrement: true });
+            objectStore.createIndex('rosterName', 'rosterName', { unique: false });
+        }
+    };
 
-// Clear the input fields
-document.querySelector('input[placeholder="First Name"]').value = '';
-document.querySelector('input[placeholder="Last Name"]').value = '';
-document.querySelector('input[placeholder="Position"]').value = '';
-document.querySelector('input[placeholder="Number"]').value = ''; 
-});
+    request.onsuccess = function(event) {
+        db = event.target.result;
+        console.log("Database opened successfully.");
+    };
 
-// Function to add player to the list in the DOM
+    request.onerror = function(event) {
+        console.error("Database error: " + event.target.errorCode);
+    };
+}
+
+function addRoster(rosterName) {
+  var transaction = db.transaction(["rosters"], "readwrite");
+  var store = transaction.objectStore("rosters");
+
+  var roster = {
+      rosterName: rosterName,
+      createdAt: new Date() // Store the creation date
+  };
+
+  var request = store.add(roster);
+
+  request.onsuccess = function() {
+      console.log("Roster added to the database", roster);
+  };
+
+  request.onerror = function(event) {
+      console.error("Error adding roster: ", event.target.error);
+  };
+}
+
+// Function to add player to the list in the DOM and to the database
 function addPlayerToList(player) {
-var listItem = document.createElement('li');
-listItem.className = 'list-group-item';
+  var listItem = document.createElement('li');
+  listItem.className = 'list-group-item';
+  listItem.innerHTML = `
+      <div class="row">
+          <div class="col-md-3">${player.firstName}</div>
+          <div class="col-md-3">${player.lastName}</div>
+          <div class="col-md-3">${player.position}</div>
+          <div class="col-md-2">${player.number}</div>
+          <div class="col-md-1 d-flex justify-content-end">
+              <button class="btn btn-outline-danger btn-sm delete-btn">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+          </div>
+      </div>
+  `;
 
-listItem.innerHTML = `
-    <div class="row">
-        <div class="col-md-3">${player.firstName}</div>
-        <div class="col-md-3">${player.lastName}</div>
-        <div class="col-md-3">${player.position}</div>
-        <div class="col-md-2">${player.number}</div>
-        <div class="col-md-1 d-flex justify-content-end">
-            <button class="btn btn-outline-danger btn-sm delete-btn">
-                <i class="fa fa-trash" aria-hidden="true"></i>
-            </button>
-        </div>
-    </div>
-`;
-
-// Add event listener for the delete button in this row
-listItem.querySelector('.delete-btn').addEventListener('click', function() {
-    // Remove player from local storage as well
-    removePlayerFromStorage(player);
-    // Remove the list item from the DOM
-    listItem.remove();
-});
-
-document.querySelector('.list-group').appendChild(listItem);
-}
-
-// Function to remove player from local storage
-function removePlayerFromStorage(playerToRemove) {
-var players = JSON.parse(localStorage.getItem('players') || '[]');
-// Filter out the player to remove
-players = players.filter(player => player.firstName !== playerToRemove.firstName || player.lastName !== playerToRemove.lastName);
-// Save the updated players array back to local storage
-localStorage.setItem('players', JSON.stringify(players));
-}
-
-// roster.js
-
-$(document).ready(function() {
-  // Function to add a new player to the player stats table
-  function addPlayerToStats(firstName, lastName) {
-      // Assuming you have jQuery loaded
-      // Find the player stats table body
-      var $tbody = $('#player-stats-table tbody');
-
-      // Construct a new row with the player's information
-      var newRow = '<tr>' +
-          '<td>' + firstName + ' ' + lastName + '</td>' +
-          '<td><input type="number" class="form-control" placeholder="Goals"></td>' +
-          '<td><input type="number" class="form-control" placeholder="Assists"></td>' +
-          '<td><input type="number" class="form-control" placeholder="Yellow Cards"></td>' +
-          '<td><input type="number" class="form-control" placeholder="Red Cards"></td>' +
-          '</tr>';
-
-      // Append the new row to the table body
-      $tbody.append(newRow);
-  }
-
-  // Event listener for the "Add Player" button click
-  $('.btn-outline-primary').click(function() {
-      // Get the input values from the form
-      var firstName = $('input[placeholder="First Name"]').val();
-      var lastName = $('input[placeholder="Last Name"]').val();
-
-      // Add the new player to the player stats table
-      addPlayerToStats(firstName, lastName);
+  // Add event listener for the delete button in this row
+  listItem.querySelector('.delete-btn').addEventListener('click', function() {
+      listItem.remove(); // Remove the list item from the DOM
+      console.log("Player removed from the list");
   });
+
+  document.getElementById('player-list').appendChild(listItem);
+}
+
+
+document.querySelector('.btn-outline-primary').addEventListener('click', function() {
+  var firstName = document.querySelector('input[placeholder="First Name"]').value.trim();
+  var lastName = document.querySelector('input[placeholder="Last Name"]').value.trim();
+  var position = document.querySelector('input[placeholder="Position"]').value.trim();
+  var number = document.querySelector('input[placeholder="Number"]').value.trim();
+
+  var player = {
+      firstName: firstName,
+      lastName: lastName,
+      position: position,
+      number: number
+  };
+
+  // Add the player to the UI list (not yet saving to IndexedDB for players)
+  addPlayerToList(player);
+
+  // Clear the input fields
+  document.querySelector('input[placeholder="First Name"]').value = '';
+  document.querySelector('input[placeholder="Last Name"]').value = '';
+  document.querySelector('input[placeholder="Position"]').value = '';
+  document.querySelector('input[placeholder="Number"]').value = ''; 
 });
+
+document.getElementById('save-roster-btn').addEventListener('click', async function() {
+  try {
+      await saveDatabase(db); // Now 'db' is accessible
+      // rest of your code...
+  } catch (error) {
+      // error handling...
+  }
+});
+
+document.getElementById('save-roster-btn').addEventListener('click', function() {
+  var rosterName = document.getElementById('rosterNameInput').value;
+  if (rosterName) {
+      addRoster(rosterName);
+  } else {
+      alert('Please enter a roster name.');
+  }
+});
+
+// Initialize the database when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+  openDatabase();
+});
+
+
+
+
 
