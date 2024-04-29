@@ -1,0 +1,59 @@
+{
+    "name": "basketballtrackingnew",
+    "productName": "Basketball Tracking New",
+    "description": "My Electron application description",
+    "version": "1.0.0",
+    "author": "kanany",
+    "main": "main.js",
+    "scripts": {
+      "start": "electron main.js",
+      "pack": "electron-builder --dir",
+      "dist": "electron-builder -m",
+      "distoldmac": "electron-builder --mac",
+      "distlinux": "electron-builder --linux",
+      "univeral": "electron-builder -mwl",
+      "package": "build"
+    },
+    "license": "ISC",
+    "dependencies": {
+    },
+    "devDependencies": {
+      "electron": "^29.1.5",
+      "electron-builder": "^23.0.0"
+    },
+    "build": {
+      "appId": "com.kanany.basketballtrackingnew",
+      "productName": "Basketball Tracking New",
+      "directories": {
+        "output": "distUniversal"
+      },
+      "files": [
+        "**/*",
+        "*.js",
+        "!**/*.ts",
+        "!*.code-workspace",
+        "!**/*.js.map",
+        "!**/*.tsbuildinfo",
+        "!**/tsconfig.json",
+        "!**/tslint.json",
+        "!**/*.spec.ts",
+        "!**/*.test.ts",
+        "!**/*.spec.js",
+        "!**/*.test.js",
+        "!test/",
+        "!tests/",
+        "!spec/",
+        "!**/__tests__/"
+      ],
+      "win": {
+        "icon": "icon.ico"
+      },
+      "mac": {
+        "icon": "../basketballLogo.icns"
+      },
+      "linux": {
+        "icon": "icons/"
+      }
+    }
+  }
+  
