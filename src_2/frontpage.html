@@ -14,6 +14,7 @@
 
     
 </head>
+
 <body>
     
 
@@ -41,6 +42,8 @@
           </div>
         </div>
       </nav>
+
+      
       
     <header class="bg-primary py-4 shadow-sm">
         <div class="container">
@@ -54,10 +57,13 @@
     </header>
     <div class="container my-4">
         <div class="text-center">
-            <button class="btn btn-success mb-3">Track New Practice</button>
+            <button class="btn btn-success mb-3" onclick="trackNewPractice()">Track New Practice</button>
+            <input class="form-control ml-3" type="date" id="select-date" name="select-date">
         </div>
         <!-- Divider Line -->
         <hr>
+
+        
     
     <div class="container mt-4">
         <div class="bg-white p-3 shadow-sm rounded">
@@ -68,7 +74,7 @@
             </form>
         </div>
     </div>
-    <main class="container mt-4">
+    <main id= "main-container" class="container mt-4">
         <!-- roster drop down -->
         <div class="container">
             <select id="rosterDropdown" class="form-control">
@@ -81,31 +87,7 @@
         <!-- Divider Line -->
         <hr>
     </div>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
-            <!-- Day Stat Card -->
-            <div class="col mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">April 1, 2023</h5>
-                        <p class="card-text">Total Practices: 12</p>
-                        <p class="card-text">Unique Players: 25</p>
-                        <p class="card-text">Attendance Rate: 85%</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Repeat for other days -->
-            <div class="col mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">April 2, 2023</h5>
-                        <p class="card-text">Total Practices: 15</p>
-                        <p class="card-text">Unique Players: 30</p>
-                        <p class="card-text">Attendance Rate: 90%</p>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
+        
     </main>
    
     

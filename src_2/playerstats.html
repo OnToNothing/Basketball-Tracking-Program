@@ -9,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="playerStatsPage.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -52,6 +53,14 @@
     </header>
 
     <div class="container mt-4">
+        <div class="form-group">
+            <label for="filter">Filter Players:</label>
+            <select id="filter" class="form-control">
+                <option value="all">All Players</option>
+                <option value="archived">Archived Players</option>
+                <option value="active">Active Players</option>
+            </select>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -63,14 +72,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr isArchived="true">
                     <td>Player 1</td>
                     <td><input type="number" class="form-control" id="player1-FTA" placeholder="Free Throws Attempted"></td>
                     <td><input type="number" class="form-control" id="player1-FTM" placeholder="Free Throws Made"></td>
                     <td><input type="number" class="form-control" id="player1-TPA" placeholder="Three Pointers Attempted"></td>
                     <td><input type="number" class="form-control" id="player1-TPM" placeholder="Three Pointers Made"></td>
                 </tr>
-                <tr>
+                <tr isArchived="false">
                     <td>Player 2</td>
                     <td><input type="number" class="form-control" id="player2-FTA" placeholder="Free Throws Attempted"></td>
                     <td><input type="number" class="form-control" id="player2-FTM" placeholder="Free Throws Made"></td>
