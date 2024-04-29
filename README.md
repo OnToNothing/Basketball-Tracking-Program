@@ -1,26 +1,30 @@
-# How to get the Live Server up and running!
+# How to get the Project up and running
 
-First, make sure you have installed LiveServer on VSCode. To do this, open
-VSCode and in the Extensions tab on the left, search LiveServer in the 
-searchbar. Click on the first result and install LiveServer.
+First, make sure you are in the src_2 folder in the repository.
 
-Open the terminal application 
-- choose/make a folder 
-- double click the folder, so that a options column pops up
-- click the "new terminal at folder" and this will open terminal in the folder
+Open the terminal application and run the following command:
 
-Clone the repository from GitHub.
-- use command "git clone" and paste the GitHub url after the command in the
- the terminal window
+```brew install node```
 
-Open the repository in VSCode
+After installing node, run the following command:
 
-Navigate to the src_2 folder in the repository.
+```npm install```
 
-Navigate to the frontpage.html file.
+```npm run univeral ```
 
-In the bottom right corner, click the button that says Live Server
+## Running the project
 
-It will open up a website with the application running! This is in development, so whenever a change is made in the repo, it will update the website. 
+after running the above commands, run the following command:
+
+open the src_2 folder in your finder
+
+then open the distUniversal folder
+
+Click on the Basketball Tracking.New.app file
+
+The project should now be running on your local machine
+
+
+
 
 
